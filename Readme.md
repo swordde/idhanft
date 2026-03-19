@@ -1,1 +1,1 @@
-again a stupoid project that i never gone a complete!!!!!!!! fuck
+again a stupoid project that i never gonna complete!!!!!!!! fuck
