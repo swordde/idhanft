@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+   
+      POSTGRES_DB: idhanft
+      POSTGRES_PASSWORD: mysecretpassword
+
+    ports:
+      - "5435:5438"
+
