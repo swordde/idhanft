@@ -9,10 +9,11 @@ import (
 type totdo struct{}
 
 func main() {
-	for true {
+	for {
 
 		fmt.Println("enter the process u want to pick!!!")
 		i := 0
+		fmt.Print(i)
 		fmt.Scan(&i)
 
 		switch i {
@@ -20,6 +21,7 @@ func main() {
 			var name, discription string
 			fmt.Scan(&name)
 			fmt.Scan(&discription)
+			stringcombiner6000(name, discription)
 			case1(name, discription)
 
 		case 2:
@@ -39,20 +41,19 @@ func main() {
 }
 
 func case1(name, description string) {
-	_, err := os.Open("activities.txt") // For read access.
+	filename := "activities.txt"
+	f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
-		log.Fatal(err)
-
-		fmt.Print("the errorr here")
+		fmt.Println("Error opening file:", err)
+		return
 	}
-	fmt.Println("process is set", name, description)
+	defer f.Close()
 
-	bytes := []byte(description)
-	err = os.WriteFile("activities.txt", bytes, 0o666)
-	if err != nil {
-		fmt.Print("")
-		log.Fatal(err)
+	if _, err := f.WriteString(description); err != nil {
+		fmt.Println("Error writing to file:", err)
+		return
 	}
+	fmt.Println("Data appended successfully")
 }
 
 func case2() {
@@ -66,4 +67,10 @@ func case2() {
 		log.Fatal(err)
 	}
 	fmt.Printf(" all the tasks are \n  %q \n ", data[:count])
+}
+
+func stringcombiner6000(name, descrition string) {
+	str := name + " " + descrition
+
+	fmt.Println(str)
 }
