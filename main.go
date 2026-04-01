@@ -54,7 +54,7 @@ func case1(name, description, tim string) {
 	defer f.Close()
 
 	if _, err := f.WriteString(value); err != nil {
-		fmt.Println("Error writing to file:", err)
+		fmt.Println("Error write to file:", err)
 		return
 	}
 	fmt.Println("Data appended successfully")
