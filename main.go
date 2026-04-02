@@ -10,6 +10,9 @@ import (
 type totdo struct{}
 
 func main() {
+	case2()
+
+	fmt.Print("file printeed11111")
 	for {
 
 		fmt.Println("\n enter the process u want to pick!!!")
@@ -62,19 +65,27 @@ func case1(name, description, tim string) {
 
 func case2() {
 	file, err := os.Open("activities.txt") // For read access.
+	//	fmt.Print("file printeed123123")
 	if err != nil {
+		//		fmt.Print("file printed here in the error for file")
 		log.Fatal(err)
 	}
-	data := make([]byte, 100)
+
+	//	fmt.Println("file printed here before the data")
+	data := make([]byte, 1000)
+
+	//	fmt.Println("file printed here after the data")
 	count, err := file.Read(data)
+	//	fmt.Println("file printed here after the count")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Print("the todo is empty!!!")
 	}
+
 	fmt.Printf(" all the tasks are \n  %q \n ", data[:count])
 }
 
 func stringcombiner6000(name, descrition, tim string) (str string) {
-	str = "\n name:" + name + " " + "desription" + descrition + "setdate:" + tim + "\n"
+	str = "\n name:" + name + " " + "desription" + descrition + " " + "setdate:" + tim + "\n"
 
 	fmt.Println(str)
 	return str
