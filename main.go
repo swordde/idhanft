@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -22,13 +23,8 @@ func main() {
 
 		switch i {
 		case 1:
-			var name, discription string
-			fmt.Scan(&name)
-			fmt.Scan(&discription)
-			tim := time.Now().Format("2006-01-02 15:04:05")
-			fmt.Printf("%T", tim)
 
-			case1(name, discription, tim)
+			case1()
 
 		case 2:
 			case2()
@@ -46,8 +42,15 @@ func main() {
 	fmt.Print("")
 }
 
-func case1(name, description, tim string) {
-	value := stringcombiner6000(name, description, tim)
+func case1() {
+	var name string
+	fmt.Scan(&name)
+	bav := bufio.NewReader(os.Stdin)
+	discription, _ := bav.ReadString('\n')
+	tim := time.Now().Format("2006-01-02 15:04:05")
+	fmt.Printf("%T", tim)
+
+	value := stringcombiner6000(name, tim, discription)
 	filename := "activities.txt"
 	f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
@@ -67,25 +70,33 @@ func case2() {
 	file, err := os.Open("activities.txt") // For read access.
 	//	fmt.Print("file printeed123123")
 	if err != nil {
-		//		fmt.Print("file printed here in the error for file")
+		//		fmt.Print("this printed here in the error for file")
 		log.Fatal(err)
 	}
 
-	//	fmt.Println("file printed here before the data")
-	data := make([]byte, 1000)
+	/*
+	   	//	fmt.Println("file printed here before the data")
+	   	data := make([]byte, 1000)
 
-	//	fmt.Println("file printed here after the data")
-	count, err := file.Read(data)
-	//	fmt.Println("file printed here after the count")
-	if err != nil {
-		fmt.Print("the todo is empty!!!")
+	   	//	fmt.Println("file printed here after the data")
+	   	count, err := file.Read(data)
+	   	//	fmt.Println("file printed here after the count")
+	   	if err != nil {
+	   		fmt.Print("the todo is empty!!!")
+	   	}
+
+	   $~$	fmt.Printf(" all the tasks are \n  %q \n ", data[:count])
+	*/
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+
+		line := scanner.Text()
+		fmt.Println(line)
 	}
-
-	fmt.Printf(" all the tasks are \n  %q \n ", data[:count])
 }
 
-func stringcombiner6000(name, descrition, tim string) (str string) {
-	str = "\n name:" + name + " " + "desription" + descrition + " " + "setdate:" + tim + "\n"
+func stringcombiner6000(name, tim, description string) (str string) {
+	str = "\n name:" + name + " " + "desription:" + description + " " + "setdate:" + tim + "\n"
 
 	fmt.Println(str)
 	return str
