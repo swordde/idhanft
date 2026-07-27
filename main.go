@@ -13,7 +13,7 @@ type totdo struct{}
 func main() {
 	case2()
 
-	fmt.Print("file printeed11111")
+	//	fmt.Print("file printeed11111")
 	for {
 
 		fmt.Println("\n enter the process u want to pick!!!")
@@ -39,7 +39,6 @@ func main() {
 			fmt.Println("case 2")
 		}
 	}
-	fmt.Print("")
 }
 
 func case1() {
@@ -88,6 +87,7 @@ func case2() {
 	   $~$	fmt.Printf(" all the tasks are \n  %q \n ", data[:count])
 	*/
 	scanner := bufio.NewScanner(file)
+	scanner.Err()
 	for scanner.Scan() {
 
 		line := scanner.Text()
